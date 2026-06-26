@@ -5,10 +5,10 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   const footerLinks = {
-    Product: ['Features', 'Pricing', 'Security', 'Updates'],
-    Company: ['About', 'Blog', 'Careers', 'Contact'],
-    Resources: ['Documentation', 'API', 'Community', 'Support'],
-    Legal: ['Privacy', 'Terms', 'Cookies', 'License'],
+    Product: ['Features', 'Pricing', 'Security', 'Status'],
+    Company: ['About Us', 'Blog', 'Careers', 'Press'],
+    Resources: ['Documentation', 'API Reference', 'Community', 'Support'],
+    Legal: ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'License'],
   }
 
   const socialLinks = [
@@ -23,13 +23,13 @@ const Footer = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.05,
       },
     },
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 10 },
     visible: {
       opacity: 1,
       y: 0,
@@ -38,11 +38,8 @@ const Footer = () => {
   }
 
   return (
-    <footer className="bg-slate-900/50 backdrop-blur-md border-t border-white/10 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
+    <footer className="relative z-10 bg-slate-900/50 backdrop-blur-xl border-t border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Main Footer Content */}
         <motion.div
           variants={containerVariants}
@@ -54,27 +51,32 @@ const Footer = () => {
           {/* Brand */}
           <motion.div variants={itemVariants} className="col-span-2 md:col-span-1">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600"></div>
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg shadow-purple-500/50"
+              ></motion.div>
               <span className="font-bold text-lg gradient-text">HariStudyPlan</span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Empowering students with AI-driven study solutions for every goal.
+              Empowering students with intelligent learning solutions for career growth.
             </p>
           </motion.div>
 
           {/* Links */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <motion.div key={category} variants={itemVariants}>
-              <h4 className="font-semibold mb-4 text-white">{category}</h4>
+              <h4 className="font-semibold mb-4 text-white text-sm">{category}</h4>
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link}>
-                    <a
+                    <motion.a
                       href="#"
-                      className="text-slate-400 hover:text-white transition-colors duration-300 text-sm"
+                      whileHover={{ x: 3, color: '#60a5fa' }}
+                      className="text-slate-400 hover:text-blue-400 transition-colors duration-300 text-sm"
                     >
                       {link}
-                    </a>
+                    </motion.a>
                   </li>
                 ))}
               </ul>
@@ -83,7 +85,12 @@ const Footer = () => {
         </motion.div>
 
         {/* Divider */}
-        <div className="border-t border-white/10 mb-8"></div>
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          className="border-t border-white/10 mb-8 origin-left"
+        ></motion.div>
 
         {/* Bottom Section */}
         <motion.div
@@ -96,7 +103,7 @@ const Footer = () => {
           {/* Left */}
           <div className="text-slate-400 text-sm text-center md:text-left">
             <p>
-              © {currentYear} HariStudyPlan. All rights reserved. | Built with passion for students.
+              © {currentYear} HariStudyPlan. All rights reserved. | Crafted with passion for students.
             </p>
           </div>
 
@@ -106,9 +113,9 @@ const Footer = () => {
               <motion.a
                 key={label}
                 href={href}
-                whileHover={{ scale: 1.2, rotate: 5 }}
+                whileHover={{ scale: 1.15, y: -5 }}
                 whileTap={{ scale: 0.9 }}
-                className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all duration-300"
+                className="w-10 h-10 rounded-lg glass-effect flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/15 transition-all duration-300"
                 aria-label={label}
               >
                 <Icon size={18} />

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Play, ArrowRight } from 'lucide-react'
-import DashboardPreview from './DashboardPreview'
+import FloatingDashboard from './FloatingDashboard'
 
 const Hero = () => {
   const containerVariants = {
@@ -24,11 +24,7 @@ const Hero = () => {
   }
 
   return (
-    <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute top-20 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"></div>
-
+    <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden z-10">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
@@ -36,28 +32,39 @@ const Hero = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="space-y-6"
+            className="space-y-8"
           >
             {/* Badge */}
             <motion.div variants={itemVariants}>
-              <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20">
-                <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></div>
-                <span className="text-sm text-blue-300">AI-Powered Learning</span>
-              </div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-effect cursor-pointer"
+              >
+                <motion.div
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="w-2 h-2 rounded-full bg-green-400"
+                ></motion.div>
+                <span className="text-sm bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent font-medium">
+                  Trusted by 10,000+ Students
+                </span>
+              </motion.div>
             </motion.div>
 
             {/* Headline */}
-            <motion.h1 variants={itemVariants} className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-              <span className="block">One Platform.</span>
-              <span className="gradient-text">Every Goal.</span>
-            </motion.h1>
+            <motion.div variants={itemVariants}>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-tight">
+                <span className="block text-white">One Platform.</span>
+                <span className="gradient-text inline-block">Every Goal.</span>
+              </h1>
+            </motion.div>
 
             {/* Subtitle */}
             <motion.p
               variants={itemVariants}
-              className="text-lg md:text-xl text-slate-400 leading-relaxed max-w-lg"
+              className="text-lg md:text-xl text-slate-400 leading-relaxed max-w-xl"
             >
-              AI-powered study planner for GATE, SSC CGL, Coding Interviews, and Career Growth. Achieve your dreams with personalized learning paths.
+              AI-powered study planner for GATE, SSC CGL, Coding Interviews, and Career Growth. Achieve your dreams with intelligent learning paths.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -65,45 +72,44 @@ const Hero = () => {
               <motion.button
                 whileHover={{ scale: 1.05, x: 5 }}
                 whileTap={{ scale: 0.95 }}
-                className="btn-primary inline-flex items-center justify-center group"
+                className="btn-primary inline-flex items-center justify-center group rounded-xl"
               >
-                Get Started
+                Get Started Free
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
               </motion.button>
               <motion.button
-                whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.1)' }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="btn-secondary inline-flex items-center justify-center group"
+                className="btn-secondary inline-flex items-center justify-center group rounded-xl"
               >
                 <Play size={20} className="mr-2" />
                 Watch Demo
               </motion.button>
             </motion.div>
 
-            {/* Trust indicators */}
-            <motion.div variants={itemVariants} className="pt-8 flex items-center space-x-4 text-sm text-slate-400">
-              <div className="flex -space-x-2">
-                {[1, 2, 3].map((i) => (
-                  <div
-                    key={i}
-                    className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 border-2 border-slate-950 flex items-center justify-center text-xs font-bold"
-                  >
-                    {i}
-                  </div>
-                ))}
-              </div>
-              <span>Join 10,000+ students achieving their goals</span>
+            {/* Stats Row */}
+            <motion.div variants={itemVariants} className="grid grid-cols-3 gap-4 pt-8 border-t border-white/10">
+              {[
+                { value: '500K+', label: 'Study Hours' },
+                { value: '10K+', label: 'Active Users' },
+                { value: '94%', label: 'Success Rate' },
+              ].map((stat, i) => (
+                <div key={i} className="text-center">
+                  <p className="text-2xl md:text-3xl font-bold gradient-text">{stat.value}</p>
+                  <p className="text-xs md:text-sm text-slate-400 mt-1">{stat.label}</p>
+                </div>
+              ))}
             </motion.div>
           </motion.div>
 
-          {/* Right Content - Dashboard Preview */}
+          {/* Right Content - Floating Dashboard */}
           <motion.div
             initial={{ opacity: 0, x: 50, rotateY: 20 }}
             animate={{ opacity: 1, x: 0, rotateY: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-            className="relative"
+            className="relative h-full min-h-[500px] md:min-h-[600px]"
           >
-            <DashboardPreview />
+            <FloatingDashboard />
           </motion.div>
         </div>
       </div>
