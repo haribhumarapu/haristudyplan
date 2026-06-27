@@ -13,12 +13,13 @@
 }
 
 @layer components {
+
   .glass-effect {
     @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl;
   }
 
   .glass-effect-light {
-    @apply bg-white/8 backdrop-blur-xl border border-white/20 shadow-2xl;
+    @apply bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl;
   }
 
   .gradient-text {
@@ -42,19 +43,32 @@
   }
 
   .feature-card {
-    @apply glass-effect p-8 rounded-2xl card-hover group cursor-pointer;
+    @apply glass-effect p-8 rounded-2xl cursor-pointer;
   }
 
   .stat-card {
-    @apply glass-effect p-6 rounded-2xl group;
+    @apply glass-effect p-6 rounded-2xl;
   }
 
   .animated-gradient {
-    @apply bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-[length:200%_200%] animate-gradient;
+    @apply bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600;
+    background-size: 200% 200%;
+    animation: gradientMove 8s ease infinite;
   }
 }
 
-/* Smooth animations */
+@keyframes gradientMove {
+  0% {
+    background-position: left;
+  }
+  50% {
+    background-position: right;
+  }
+  100% {
+    background-position: left;
+  }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -89,8 +103,8 @@
 }
 
 @keyframes floatUp {
-  0%, 100% {
-    transform: translateY(0px);
+  0%,100% {
+    transform: translateY(0);
   }
   50% {
     transform: translateY(-20px);
@@ -98,20 +112,20 @@
 }
 
 @keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(168, 85, 247, 0.2);
+  0%,100% {
+    box-shadow: 0 0 20px rgba(59,130,246,.3),0 0 40px rgba(168,85,247,.2);
   }
   50% {
-    box-shadow: 0 0 40px rgba(59, 130, 246, 0.5), 0 0 80px rgba(168, 85, 247, 0.3);
+    box-shadow: 0 0 40px rgba(59,130,246,.5),0 0 80px rgba(168,85,247,.3);
   }
 }
 
-@keyframes pulse-glow {
-  0%, 100% {
-    opacity: 1;
+@keyframes pulseGlow {
+  0%,100% {
+    opacity:1;
   }
   50% {
-    opacity: 0.8;
+    opacity:.8;
   }
 }
 
@@ -124,23 +138,24 @@
 }
 
 .animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+  animation: pulseGlow 2s ease-in-out infinite;
 }
 
-/* Scrollbar styling */
+/* Scrollbar */
+
 ::-webkit-scrollbar {
-  width: 8px;
+  width:8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.5);
+  background:#020617;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(59, 130, 246, 0.5);
-  border-radius: 4px;
+  background:#3b82f6;
+  border-radius:8px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(59, 130, 246, 0.7);
+  background:#2563eb;
 }

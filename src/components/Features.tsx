@@ -119,7 +119,7 @@ const Features = () => {
                   y: -12,
                   boxShadow: `0 20px 40px rgba(0, 0, 0, 0.4)`,
                 }}
-                className="feature-card relative overflow-hidden"
+                className="feature-card group relative overflow-hidden"
               >
                 {/* Gradient background on hover */}
                 <motion.div
